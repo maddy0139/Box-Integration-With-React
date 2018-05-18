@@ -4,6 +4,7 @@ import BoxHelper from './Helper/BoxHelper';
 import PageHeader from './Home/PageHeader';
 import TableHeader from './Home/TableHeader';
 import GroupContent from './Home/GroupContent';
+import GroupRow from './Home/GroupRow/GroupRow';
 let moment = require('moment');
 
 class App extends Component {
@@ -52,20 +53,20 @@ class App extends Component {
   AddGroupInfo(rowId, groupName, groupDesc, groupId, membershipId, role, groupCreatedDate, groupInviteLevel)
   {
     let reactHandler = this;
-    reactHandler.state.Groups.splice(0);
+    reactHandler.state.Groups.slice();
     let arrayvar = reactHandler.state.Groups.slice();
     arrayvar.push({"groupIndex": rowId,"groupName":groupName,"groupDesc":groupDesc,
                    "groupId":groupId,"membershipId":membershipId,"role":role,
                    "groupCreatedDate":groupCreatedDate,
                    "groupInviteLevel":groupInviteLevel});
-
-    this.setState((prevState) => {
+    this.setState({Groups:arrayvar});
+    /*this.setState((prevState) => {
       // Important: read `prevState` instead of `this.state` when updating.
       return {Groups: prevState.Groups.push(arrayvar)}
     });
 
     var Groups = [...this.state.Groups, arrayvar];
-    this.setState({Groups})
+    this.setState({Groups})*/
   }
 
   render() {
@@ -73,11 +74,15 @@ class App extends Component {
       <div className="container bxPageWrapper">
         <PageHeader />
         <TableHeader />
-        {this.state.Groups.map(function(item,key)
-          {
-            return (<GroupContent groupInfo = {item} key={key}/>);
-          },this)
-        }
+        <div className="slimScrollDiv" style={{"position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
+            <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "750px"}}>
+            {this.state.Groups.map(function(item,key)
+              {
+                return (<GroupRow groupInfo = {item} key={key}/>);
+              },this)
+            }
+            </div>
+        </div>
       </div>
     );
   }
