@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import BoxSdk from '../sdk';
+import BoxHelper from './Helper/BoxHelper';
+import PageHeader from './Home/PageHeader';
+import TableHeader from './Home/TableHeader';
+import GroupContent from './Home/GroupContent';
+
 class App extends Component {
   constructor(props)
   {
@@ -10,28 +14,16 @@ class App extends Component {
   }
   componentDidMount()
   {
-    let box = new BoxSdk();
-    let AdminClient = new box.BasicBoxClient({accessToken: "KLrFZ02LFmNrknqMCaMfP3qAgc4Oy0SB"});
-    AdminClient.groups.getAll()
-    .then(function (memberships) 
-    {
-        console.log(memberships);
-    })
-    .catch(function(err)
-    {
-        console.log(err);
+    BoxHelper.IsTokenAvailable().then(data=>{
     });
   }
   render()
   {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container bxPageWrapper">
+        <PageHeader/>
+        <TableHeader/>
+        <GroupContent/>
       </div>
     );
   }

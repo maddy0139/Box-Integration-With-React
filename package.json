@@ -10,9 +10,9 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
-    "clean-dist":"npm run remove-dist && mkdir dist",
-    "remove-dist":"node_modules/.bin/rimraf ./dist",
-    "prebuild":"npm-run-all clean-dist test lint",
+    "clean-dist": "npm run remove-dist && mkdir dist",
+    "remove-dist": "node_modules/.bin/rimraf ./dist",
+    "prebuild": "npm-run-all clean-dist test lint",
     "build": "babel-node tools/build.js"
   },
   "author": "Cory House",
@@ -20,7 +20,9 @@
   "dependencies": {
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
+    "es6-promise": "^4.0.5",
     "jquery": "2.2.3",
+    "moment": "^2.22.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-redux": "4.4.5",
@@ -28,9 +30,8 @@
     "react-router-redux": "4.0.4",
     "redux": "3.5.2",
     "redux-thunk": "2.0.1",
-    "toastr": "2.1.2",
-    "es6-promise": "^4.0.5",
     "rusha": "^0.8.6",
+    "toastr": "2.1.2",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
