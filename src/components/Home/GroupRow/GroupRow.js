@@ -11,7 +11,7 @@ class GroupRow extends React.Component
             <div className="panel panel-default bxDashRowWrap">
                 <div className="panel-heading">
                     <a className="bxDashGroupCol">
-                        <span data-toggle="collapse" data-parent="#accordion" data-target="#1043046214">IBX Administrative</span>
+                        <span data-toggle="collapse" data-parent="#accordion" data-target="#1043046214">{this.props.groupName}</span>
                         
                     </a>
                     <span className="bxDashAdminCol">
