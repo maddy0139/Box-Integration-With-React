@@ -1,0 +1,894 @@
+﻿@font-face {
+    font-family: 'ProximaNova-Regular';
+	src: url('./fonts/proximanova-regular-webfont.eot') format('eot'),
+         url('./fonts/proximanova-regular-webfont.svg') format('svg'),
+		 url('./fonts/proximanova-regular-webfont.ttf') format('ttf'),
+		 url('./fonts/proximanova-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ProximaNova-Bold';
+    src: url('./fonts/proximanova-bold-webfont.woff') format('woff'),
+         url('./fonts/proximanova-bold-webfont.ttf') format('ttf'),
+		 url('./fonts/proximanova-bold-webfont.svg') format('svg'),
+		 url('./fonts/proximanova-bold-webfont.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+}
+select::-ms-expand {
+    display: none;
+}
+a:hover {
+	text-decoration:none;
+}
+body {
+	font-family: 'ProximaNova-Regular';
+	font-size:14px;
+	background:#f3f3f3;
+}
+
+input:focus, button:focus, select:focus, textarea:focus {
+	outline:0;
+	background:inherit;
+}	
+.ms-fullWidth , .tableCol-75, .tableCol-75 > .cell-margin {
+	display:block;
+}
+.btn-default.btn-active:active:focus { background:#ff0000;color:#fff; outline:0; }
+.btn-default.btn-disable:active:focus { background:#b8b8b8;color:#fff; outline:0; }
+.bxPageWrapper {
+	margin:15px auto;
+	padding:0;
+}
+#sideNavBox {
+	display:none;
+}
+#contentBox {
+	margin:0;
+}
+.ms-core-overlay {
+	background:#f3f3f3;
+}
+select {
+	border:0;
+    background: transparent;
+}
+/***********
+Dashboard style 
+*************/
+.bxDashboardAccordion {
+	padding-right:15px;
+}
+.bxDashHead {
+	margin-bottom:30px;
+}
+.bxDashHeadLHS {
+	display: inline-block;
+    width: 60%;
+    padding-right: 10%;
+}
+.bxDashHeadLHSTitle {
+	font-family: 'ProximaNova-Bold';
+	font-size: 24px;
+	color: #333333;
+	display:block;
+}
+.bxDashHeadLHSDescri {
+	font-size: 14px;
+	color: #333333;
+}
+.bxDashHeadRHS {
+	display: inline-block;
+    width: 38%;
+    margin-bottom:10px;
+	vertical-align: bottom;
+}
+.bxDashSearchDv {
+	position:relative;
+	border:1px solid #b9b9b9;
+	padding:5px;
+	display: inline-block;
+	margin-left:20px;
+	width: 55%;
+	background: #fff;
+}
+.bxDashSearchDv::after {
+	position:absolute;
+	content: "\f002";
+	color:#ff0000;
+	right: 10px;
+    font: normal normal normal 14px/1 FontAwesome;
+    top: 8px;
+}
+input[type="text"].bxSearchBox {
+	border:0;
+	width:88%;
+}
+.bxDashAddGroupBtn {
+	position:relative;
+	background:#ff0000;
+	color:#fff;
+	font-size: 14px;
+	padding: 11px 15px;
+    border-radius: 3px;
+	padding-left: 25px;
+}
+.bxDashAddGroupBtn::before {
+	content: "\f055";
+    font: normal normal normal 14px/1 FontAwesome;
+    left: 8px;
+    position: absolute;
+    top: 12px;
+}
+.panel-heading > a > span:hover {
+	cursor:pointer;
+	color:#ff0000;
+}
+.panel-default>.panel-heading {
+	background:#fff;
+	padding-left: 0;
+    padding-right: 0;
+	border: 1px solid #ddd;
+	 position:relative; 
+}
+.panel-heading > .bxDashGroupCol::before {
+	font-weight: bold;
+    content: "\f105";
+    position: absolute;
+    left: 10px;
+    font: bold normal normal 14px/1 FontAwesome;
+    color: #666;
+    border: 1px solid #666;
+    border-radius: 50%;
+    line-height: 17px;
+    padding: 1px 5px;
+	text-indent: 2px;
+}
+.panel-heading.active > .bxDashGroupCol::before {
+	content: "\f107";
+	background:#004B8D;
+	color:#fff;
+	padding: 1px 4px;
+	line-height: 16px;
+}
+.panel-heading a {
+	color:#ec1d23;
+	font-size: 14px;
+}
+.panel-heading a > span {
+	padding:0 5px;
+}
+.panel { background:transparent; border: 0; margin-top:10px !important;}
+.bxDashColHeader {
+	border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+	font-family: 'ProximaNova-Bold';
+	font-size: 14px;
+}
+.bxDashGroupCol {
+		padding-left:40px;
+}
+.bxDashColHeader > span , .panel-heading > a, .panel-heading > span {
+	display:inline-block;
+	vertical-align:top;
+}
+.detailLabel {
+	font-size: 12px;
+    color: #333333;
+    display: block;
+}
+.detailTxt {
+	font-size: 14px;
+    color: #333333;
+    margin-top: 10px;
+    display: block;
+    font-weight: bold;
+}
+.detailGroupNameCol {
+	 width: 25%;
+}
+.detailGroupDescriCol {
+	 width: 37%;
+}
+.detailGroupPermCol {
+	 width: 16%;
+}
+.detailGroupDateCol {
+	 width: 10%;
+}
+input[type="button"].editBtn {
+	background: #ff0000;
+    color: #fff;
+    min-width: 80px;
+    padding: 5px 0;
+    border: 0;
+    font-size:14px;
+    border-radius: 3px;
+}
+.bxDashAdminCol, .bxDashGroupCol { width:34%; }
+.bxDashDateCol , .bxDashFoldersCol, .bxDashMemberCol { width:10%; }
+.panel-collapse  {
+	border:1px solid #004B8D;
+	margin-top:15px;	
+	position:relative;
+	background:#fff;
+	padding:15px 0;
+}
+.panel-heading.active {
+	border-color:#004B8D;
+}
+.panel-heading.active a[aria-expanded="true"],
+.panel-heading.active a[aria-expanded="true"] span {
+	color:#ff0000;
+}
+.panel-collapse  > div {
+	padding:0 15px;
+	display: inline-block;
+    vertical-align: top;
+}
+.panel-collapse::before {
+	content:"";
+	background:url("./images/accordionTopArrow.png");
+	position: absolute;
+    top: -13px;
+    left: 40px;
+    width: 23px;
+    height: 14px;
+}
+.MemberColumn.panel-collapse::before {
+	left: auto;
+	right:27%;
+}
+.FolderColumn.panel-collapse::before {
+	left: auto;
+	right:17%;
+}
+.detailMemberRow {
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    padding-bottom: 10px !important;
+    margin-bottom: 10px;
+}
+.detailMemberRow > span {
+	width: 16%;
+    display: inline-block;
+}
+.detailMemberRow {
+	font-family:'ProximaNova-Bold';
+}
+.detailMemberHeadRow {
+	font-family:'ProximaNova-Regular';
+	border-bottom:2px solid #ddd;
+}
+.detailMemRemoveLabel {
+	text-align:right;
+}
+.detailMemberRow > span.detailMemNameLabel,
+.detailMemberRow > span.detailMemEmailLabel {
+    width: 33%;
+	padding: 0 15px 0 0;
+}
+.detailMemPermiLabel select {
+    border: 0;
+    font-family: 'ProximaNova-Bold';
+}
+.panel-collapse > div.detailMemberTop {
+	font-weight:bold;
+	width:100%;
+	padding:0 15px 20px;
+}
+.detailMemberTop > span {
+    display: inline-block;
+}
+.detailMemberTopLinks {
+    display: inline-block;
+    float: right;
+}
+a.Link {
+    color: #ff0000;
+    margin: 0 20px;
+}
+a.Link:hover { cursor:pointer; }
+a.dsblLink {
+    color: #9B9B9B;
+    margin: 0 20px;
+}
+.FolderColumn .detailMemberRow > span.detailFoldNameLabel {
+    width: 30%;
+}
+span[aria-expanded="true"] { color:#ff0000;     font-family: 'ProximaNova-Bold'; } 
+.slimScrollDiv .slimScrollRail {     background: #ccc !important;  opacity: 1 !important;  width:4px !important; }
+.slimScrollBar {     background: #666 !important;  opacity: 1 !important; width:4px !important; }
+
+span[aria-expanded="true"]:before{
+	content:"\f107";
+	color:#fff;
+	background-color:#004B8D;
+	position:absolute;
+	left:10px;
+	font:bold normal normal 14px/1 FontAwesome;	
+	border-radius: 50%;
+    line-height: 19px;
+    padding: 1px 5px;
+    text-indent: 1px;
+}
+span.detailFoldOwnLabel {
+    width: 20%;
+}
+span.detailFoldSizeLabel {
+    width: 10%;
+}
+.FolderColumn  .detailMemberRow > span {
+    width: 12%;
+}
+.modal-header {
+	
+}
+.panel-heading > .bxDashAdminCol { width:36%; }
+.panel-heading > .bxDashDateCol { width:8%; }
+.modal-title {
+	font-family:'ProximaNova-Bold';
+	font-size:22px;
+}
+.modal-header { border:0; }
+.modal-header .close {
+	background: #6d6d6d;
+    text-shadow: 0 0 0;
+    color: #fff;
+    border-radius: 50%;
+    padding: 0px 5px;
+    opacity: 1;
+    min-width: 1em !important;
+}
+.csCheckbox  {
+	display:inline-block;
+	margin-right:25px;
+}
+.filterContent > .csCheckbox:last-child  {
+	margin-right:0;
+}
+.csCheckbox label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    margin-left: -15px;
+    border: 1px solid #979797;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.checkbox-primary input[type="checkbox"]:checked + label::before,
+.folderSelectButton[value="Remove"] + label::before  {
+    content: "\f00c";
+    position: absolute;
+    left: 0;
+    color: #ff0000;
+    font: normal normal normal 13px/1 FontAwesome;
+    top: 0px;
+    border: 2px solid #ff0000;
+    line-height: 13px;
+    text-align: center;
+}
+.csCheckbox input[type="checkbox"] {
+    opacity: 0;
+}
+.csCheckbox label {
+    display: inline-block;
+    position: relative;
+    padding-left: 10px;
+	font-weight: normal;
+    font-size: 14px;
+	color:#333;
+}
+.bxAddMemberBoxLHS {
+    width: 75%;
+    display: inline-block;		
+}
+.bxAddMemberLabel {
+    font-family: 'ProximaNova-Bold';
+    font-size: 15px;
+}
+.bxAddMemberPicker {
+    border: 1px solid #979797;
+    margin: 5px 0 15px;
+}
+.bxAddMemberBox button {
+    background: #ff0000;
+    border: 0;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 3px;
+    margin-left: 3%;
+    width: 21%;
+    display: inline-block;
+    font-size: 16px;
+    top: 23px;
+    position: relative;
+    vertical-align: top
+}
+.bxCreateGroupCategory {
+    border-top: 1px solid #979797;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+.bxCreateGroupCategory > span {
+	display:block;
+}
+.bxCreateGroupCategory textarea { height:125px; }
+.bxCreateGroupCategory input[type="text"], .bxCreateGroupCategory textarea {
+	width:75%;
+	resize:none;
+	padding:5px 10px;
+}
+.bxCreateGroupCategory .csCheckbox { margin-right:0;     margin-top: 12px; }
+.bxCreateGroupCategory .csCheckbox label { 
+	font-family: ProximaNova-Bold;
+    font-size: 15px;
+    color: #333333;
+}
+.checkbxNote {
+	padding-left: 25px;
+    display: block;
+    font-size: 13px;
+}
+.bxCreateGroupTopLabel {
+	font-family: ProximaNova-Bold;
+    font-size: 18px;
+    color: #004B8D;
+}
+.bxCreateGroup > .bxCreateGroupCategory:first-child { margin-top:0; }
+.modal .modal-footer  { border:0; text-align:left; }
+.modal-footer .btn { 
+	color: #fff;
+    min-width: 140px;
+    border: 0;
+    padding: 11px 0;
+    font-size: 14px;
+	margin-right: 15px;
+}
+.modal-footer .btn-active { background:#ff0000; }
+.modal-footer .btn-disable { background:#b8b8b8; }
+.bxCreateGroupTxt {
+	font-size: 14px;
+	color: #333333;
+}
+.bxCreateGroupCategory  .bxAddMemberLabel {
+	margin:15px 0 5px;
+}
+.bxDashAddGroupBtn:hover {
+	cursor:pointer;
+}
+.modal-body { padding:0 15px 15px; }
+.bxAddedMember {
+	background: #004B8D;
+    color: #fff;
+    padding: 3px 5px 3px 10px;
+    margin: 4px 4px;
+    display: inline-block;
+    border-radius: 4px;
+}
+.bxAddedMember i{ 
+	font-weight: bold;
+    padding: 5px;
+}
+.bxAddedMember i:hover { 
+	cursor:pointer;
+}
+.bxAddMemberPicker input.bxAddedMemTxtBox {
+	border:0;
+	margin:7px 0;
+	padding:0 5px;
+}
+.bxAddMemberBox > h3 {
+	display:none;
+}
+.peoplePickerList > li {
+    padding: 3px 0;
+}
+.bxAddMemberPicker > div {
+	display:inline-block;	
+}
+.peoplePickerList {
+    margin: 0;
+    list-style: none;
+    padding:0;
+}
+.peoplePickerList > li:first-child {
+    border-top: 1px solid #979797 !important;
+}
+.peoplePickerList > li:hover { cursor:pointer; }
+.peoplePickerList > li {
+    padding: 5px 5px;
+}
+/* Save changes Popup */
+#saveMemberModal .modal-footer .btn,
+#saveFolderModal .modal-footer .btn {
+	min-width: 70px;
+	font-weight:bold;
+}
+.bxmodalMsg {
+	font-size:15px;
+	font-weight:bold;
+}
+#saveMemberModal.modal .modal-footer,
+#saveFolderModal.modal .modal-footer {
+	text-align:center;
+}
+/* Success Alert Message */
+.alert-success { 
+	font-size:15px; 
+	padding:10px;     
+	position: fixed;
+    width: inherit;
+    z-index: 9; 
+    top: 20%;
+}
+
+
+/********** Added by Mahendra ****/
+.bxFolderBreadCrumb > ul{
+	list-style:none;
+	margin-left:10px;
+}
+.bxFolderBreadCrumb > ul > li{
+	float:left;
+	margin-right:5px;
+}
+.bxFolderBreadCrumb > ul > li::before{
+	font-weight: bold;
+    content: "\f105";
+    left: 10px;
+    font: bold normal normal 14px/1 FontAwesome;
+    color: #666;
+    border-radius: 50%;
+    line-height: 17px;
+    padding: 1px 5px;
+    text-indent: 2px;
+}
+.folderRow{
+	clear:both;
+}
+.folderSelectButton{
+	background: #ff0000;
+    color: #fff;
+    min-width: 60px;
+    padding: 5px 0;
+    border: 0;
+    font-size: 14px;
+    border-radius: 3px;
+}
+input[type="button"].selectedBtn{
+	background: #ff0000;
+    color: #fff;
+    min-width: 60px;
+    padding: 5px 0;
+    border: 0;
+    font-size: 14px;
+    border-radius: 3px
+}
+div.bxFolderBreadCrumb {
+	display: inline-block;
+    margin: 0 0 0px 0;
+}
+ul.bxFolderBreadCrumb .detailFoldNameLabel:hover,
+.folderPopupRow .detailFoldNameLabel:hover {
+	cursor:pointer;
+}
+.bxFolderBreadCrumb ul li span.detailFoldNameLabel{
+	color:#ec1d23;
+}
+.bxFolderBreadCrumb ul li:last-child span.detailFoldNameLabel{
+	font-weight:bold;	
+}
+.AddFolderCkBx input[type="checkbox"] {
+	min-width:auto;
+}
+.folderPopupRow {
+	margin-bottom:0;
+	padding-top:10px;
+}
+.folderPopupRow.selectedFolderRow {
+	background:#eaeaea;
+}
+
+.csCheckbox.AddFolderCkBx {
+	margin-right:0;
+}
+.FolderColumn .detailMemberRow > span.emptyCol {
+	width:4%;
+}
+#addFolderModal .dsblLink {
+	display: inline-block;
+    text-align: right;
+    float: right;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+}
+#addFolderModal .csCheckbox label::before {
+	top:4px;
+}
+#addFolderModal .detailFoldPerLabel {
+    width: 23%;
+}
+#addFolderModal .detailFoldModiLabel {
+	width:19%;
+}
+#addFolderModal .detailMemberHeadRow {
+	margin-bottom:0;
+}
+
+#addFolderModal .FolderColumn .detailMemberRow > span.detailFoldSizeLabel {
+	width:7%;
+}
+#addFolderModal .Link {
+    float: right;
+	display: inline-block;
+    text-align: right;
+	background:#ff0000;
+	color:#fff;
+	border: 1px solid #ff0000;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius:3px;
+}
+#createFolderModal .modal-footer .btn {
+	min-width:90px;
+}
+#createFolderModal .bxCreateGroupCategory {
+	padding-top:0;
+	margin-top:0;
+}	
+.boxLoader {
+	position:fixed;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0);
+	left:0;
+	top:0;
+}
+.boxLoader::after {
+    content: " ";
+    background: url("./images/boxLoader.gif");
+    background-repeat:no-repeat;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+}
+.addFoldrMemBtn {
+	border:0;
+	text-align: center;
+    margin: 0;
+}
+.addFoldrMemBtn button, 
+.addFoldrMemBtn button:hover,
+.addFoldrMemBtn button:focus {
+	background:#ff0000;
+	color: #fff;
+    min-width: 100px;
+    border: 0;
+    padding: 11px 0;
+    font-size: 14px;
+    margin-right: 15px;
+}
+.alertBox {
+	border-color:#ff0000 !important;
+}
+.alertMsg {
+	color:#ff0000;
+	font-size:12px;
+}
+
+
+/*********************
+Folder View Style 
+***********************/
+.bxPageWrapper { background:#fff; }
+.clscroll table {
+    table-layout: fixed;
+}
+.clscroll td, .clscroll th { 
+    overflow: hidden;
+}
+.corner-header {
+    float: left;
+	    position: relative;
+}
+.column-headers {
+    overflow:hidden;
+	width:calc(100% - 380px) !important;
+	border-right: 1px solid #ddd;
+}
+.row-headers {
+    clear: both;
+    float: left;    
+    overflow:hidden;
+}
+.table-content {
+    overflow: auto;
+}
+.legend {
+    display: inline-block;
+     border: 1px solid #ccc;
+    padding: 7px 10px;
+    font-size: 13px;
+    margin: 0 15px 15px 0;
+  /*  background: url("../images/boxSprite.png") no-repeat 4px center;
+    background-size: 26px;
+    padding-left: 33px;*/
+}
+.clscroll.corner-header th { height: 201px; width:345px; vertical-align:top; border-right: 2px solid #5c5c5c; }
+.clscroll.row-headers th { 
+	width:346px; 
+	padding:19px 10px;     
+	border-right: 2px solid #5c5c5c;
+	border-top:0;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+	/*background:url("../images/folderIcon.png") no-repeat 15px center;
+	padding-left: 40px;*/
+}
+.clscroll.column-headers th { height:201px; }
+.clscroll.table-content td { padding:15px 0; text-align:center;}
+.clscroll.table-content td select {
+	font-size: 12px;
+    border: 0;
+    position: relative;
+    bottom: 2px;
+}
+.clscroll.table-content td { height: 59px; vertical-align:top; padding:0; }
+.editorRole {
+    display: inline-block;
+    padding-top: 2px;
+}
+.clscroll td, .clscroll th, .table-content td { 
+    border: 1px solid black;
+	border: 1px solid #ddd;
+	position: relative;
+	padding: 10px;
+	width:70px
+}
+.column-headers th > span {
+ transform-origin: 0 50%;
+  transform: rotate(-90deg); 
+  white-space: nowrap; 
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 270%;
+}
+.row-headers {
+    max-height: 600px;
+	border-bottom:1px solid #ddd;
+}
+.table-content {
+    max-height:600px;
+}
+.LEditor { background-position:4px -37px; padding:7px 13px; }
+.LCoOwner { background-position:4px -4px; padding:7px 14px; }
+.LViewer { background-position:4px -103px; padding: 7px 14px; margin-right: 0; }
+.LPre { background-position:4px -70px; padding:7px 24px; } 
+.LUploader { background-position:4px -198px; padding:7px 26px; }
+.LViewUpld { background-position:4px -132px; padding: 7px 26px;  margin-right: 0; }
+.LPrevUpld { background-position:4px -165px; padding: 7px 18px; margin-right: 0; } 
+.editorRole mark {
+    background-color: transparent;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    display: inline-block;
+    top: 0px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.editorRole mark:hover { cursor:default; }
+.editorRole select {
+    font-family: 'ProximaNova-Bold';		
+}
+.editorRole select option {
+    font-size: 14px;
+}
+.EditorIcon, .LEditor i, option[title="Editor"] {  color:#ff0000;     font-style: initial; }
+.CoOwnerIcon, .LCoOwner i, option[title="Co-Owner"] { color:#B6E566;     font-style: initial;}
+.ViewerIcon, .LViewer i, option[title="Viewer"] { color:#029d44;     font-style: initial; }
+.PreViewerIcon, .LPre i, option[title="Previewer"] { color:#145285;     font-style: initial; }
+.UploaderIcon, .LUploader i, option[title="Uploader"] { color:#666666;     font-style: initial; }
+.ViewUploaderIcon, .LViewUpld i, option[title="Viewer Uploader"] { color:#17bdd7;     font-style: initial; }
+.PrevUploaderIcon, .LPrevUpld i, option[title="previewer uploader"] { color:#f9971e;     font-style: initial; }
+
+.column-headers, .table-content, .table-content table, .column-headers table {
+    max-width:calc(100% - 363px);
+}
+.labelTxt {
+	position: absolute;
+    right: 15px;
+    bottom: 20px;
+    vertical-align: top;
+	font-weight:bold;
+}
+.labelTxt::after {
+	content: "\f178";
+    font-family: FontAwesome;
+    text-align: right;
+    margin-left: 5px;
+}
+.row-grayPatch {
+	background: #D8D8D8;
+    width: calc(100% - 17px);
+    font-weight: bold;
+	font-size: 13px;
+}
+.foldersLabel {
+	display: inline-block;
+    width: 346px;
+    padding: 1px 10px;
+    border-right: 2px solid #5C5C5C;
+	position:relative;
+}
+.foldersLabel::after  {
+	content:"\f175";
+	font-family:FontAwesome;
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: normal;	
+}
+.PermissionsLabel {
+	padding: 1px 10px;
+}
+
+/* Folder view Breadcrum */
+.folderViewSaveBtn {
+	margin: 15px auto;
+}
+.folderViewbreadCrum{
+	width: 85%;
+    display: inline-block;
+    text-align: left;
+}
+.folderViewbreadCrum > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.folderViewSaveBtn input {
+	float:right;
+}
+.folderViewbreadCrum > ul li {
+	display: inline-block;
+    margin-right: 8px;
+}
+.folderViewbreadCrum > ul li a, span.folderNameColmn{
+	color:#ec1d23;
+}
+.folderViewbreadCrum > ul li a:hover, span.folderNameColmn:hover {
+	cursor:pointer;
+}
+.folderViewbreadCrum > ul li:last-child a {
+	font-family: 'ProximaNova-Bold';	
+}
+.folderViewbreadCrum > ul li::after {
+	content: "\f105";
+    font-family: FontAwesome;
+    margin-left: 8px;
+    font-size: 15px;
+}
+.folderViewbreadCrum > ul li:last-child::after {
+	content: "";
+	display:none;
+}

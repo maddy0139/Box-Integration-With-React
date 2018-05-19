@@ -14,7 +14,7 @@ class GroupContent extends React.Component
     render()
     {
         return(
-            <GroupRow groupName={this.props.groupName}/>
+            <GroupRow groupInfo={this.props.groupInfo}/>
         );
     }
 }

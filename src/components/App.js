@@ -5,6 +5,7 @@ import PageHeader from './Home/PageHeader';
 import TableHeader from './Home/TableHeader';
 import GroupContent from './Home/GroupContent';
 import GroupRow from './Home/GroupRow/GroupRow';
+import $ from 'jquery';
 let moment = require('moment');
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
                 let groupPosition = this.state.Groups.length;
                 if(membership.role === 'admin')
                 {
-                  this.AddGroupInfo(groupPosition,membership.group.name,groupInfo.description, membership.group.id, membership.id, membership.role, "", "", "", dt.format("DD MMM YYYY"), groupInfo.invitability_level, "", "");
+                  this.AddGroupInfo(groupPosition,membership.group.name,groupInfo.description, membership.group.id, membership.id, membership.role,dt.format("DD MMM YYYY"), groupInfo.invitability_level);
                 }
               });
             });

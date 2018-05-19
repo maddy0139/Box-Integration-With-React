@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import BoxSdk from '../../sdk';
-var moment = require('moment');
+let moment = require('moment');
 
 const BoxHelper = {
     Box : "",
@@ -17,37 +17,62 @@ BoxHelper.GetTokenData = () => {
         method: 'GET',
         headers: { 'Accept': 'application/json; odata=nometadata' }
     }).then(result => result);
-}
+};
 
 BoxHelper.GetAdminUser = () => {
-    let siteUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin User'";
+    let deferred = $.Deferred();
+    deferred.resolve("mahendra.gohel@spadeworx.com");
+    return deferred.promise();
+    /*let siteUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin User'";
 
     return $.ajax({
         url: siteUrl,
         method: 'GET',
         headers: { 'Accept': 'application/json; odata=nometadata' }
-    }).then(result => result.value[0].Value);
-}
+    }).then(result => result.value[0].Value);*/
+};
 
 
 BoxHelper.GetUserId = (userLogin) =>
 {
     return BoxHelper.adminClient.users.getEnterpriseUsers({ params: { filter_term: userLogin } })//_spPageContextInfo.userEmail
     .then(result =>result.entries[0]);
-}
+};
 
 BoxHelper.GetGroupMembershipsOfUser = (userId,offset,limit) =>
 {
     return BoxHelper.adminClient.users.getGroupMemberships({ userId: userId, params: { fields: "group,role",limit:limit.toString(),offset:offset.toString()} })
     .then(result=>result.entries);
-}
+};
 
 
 BoxHelper.GetGroupInfo = (groupId)=>
 {
     return BoxHelper.userClient.groups.get({ groupId: groupId, params: { fields: "invitability_level,item,user,created_by,created_at,accessible_by,description" } })
     .then(result=>result);
+};
+
+
+BoxHelper.GetGroupUsers = (groupId) =>
+{
+    return BoxHelper.adminClient.groups.getMembershipsForGroup({ groupId: groupId, params: { fields: "id,user,role" } })
+    .then(members=>members.entries);
+};
+
+
+BoxHelper.GetCollaborationsForGroup = (groupId) =>
+{
+    return BoxHelper.userClient.groups.getCollaborationsForGroup({ groupId: groupId, params: { fields: "item,created_by,created_at,accessible_by" } })
+    .then(collabInfo =>collabInfo.entries);
+};
+
+
+BoxHelper.GetFoldersInformation = (folderId) =>
+{
+    return BoxHelper.adminClient.folders.get({ folderId: folderId, params: { fields: "name,modified_at,id,owned_by,size" } })
+    .then(folderInfo => folderInfo);
 }
+
 BoxHelper.serverDateTime = (date) => {
     let dt = date || new Date();
     let context = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
@@ -66,9 +91,13 @@ BoxHelper.serverDateTime = (date) => {
             deferred.reject();
         });
     return deferred.promise();
-}
-BoxHelper.IsTokenAvailable = () => {
+};
+BoxHelper.IsTokenAvailable = () => 
+{
+    BoxHelper.adminToken = "5HrnsG4YB1is19cThPowdIQRjxuVemG7";
     let deferred = $.Deferred();
+    deferred.resolve(true);
+    /*let deferred = $.Deferred();
     BoxHelper.GetTokenData().then(data => {
         BoxHelper.serverDateTime(new Date()).then(curDate => {
             let currentDate = moment(new Date(curDate));
@@ -88,8 +117,8 @@ BoxHelper.IsTokenAvailable = () => {
                 }
             });
         });
-    });
+    });*/
     return deferred.promise();
-}
+};
 
 export default BoxHelper;
