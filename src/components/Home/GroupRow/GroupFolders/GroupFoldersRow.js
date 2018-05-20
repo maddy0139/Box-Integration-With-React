@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import GroupFolderTop from './GroupFolderTop';
 import GroupFoldersHeader from './GroupFodlersHeader';
 import GroupFolder from './GroupFolder';
-import BoxHelper from '../../../Helper/BoxHelper';
+import BoxHelper from '../../../../Helper/BoxHelper';
 import $ from 'jquery';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../../../actions/courseActions';

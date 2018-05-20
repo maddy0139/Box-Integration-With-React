@@ -1,12 +1,13 @@
 import {connect} from 'react-redux';
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import BoxHelper from './Helper/BoxHelper';
+import { Scrollbars } from 'react-custom-scrollbars';
+import BoxHelper from '../Helper/BoxHelper';
 import PageHeader from './Home/PageHeader';
 import TableHeader from './Home/TableHeader';
-import GroupContent from './Home/GroupContent';
 import GroupRow from './Home/GroupRow/GroupRow';
 import $ from 'jquery';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 let moment = require('moment');
 
 class App extends React.Component {
@@ -26,6 +27,10 @@ class App extends React.Component {
         this.GetUserGroupCollection(user);
       });
     });
+  }
+  componentDidUpdate()
+  {
+    //BoxHelper.OnReadyJqueryFunctions();
   }
 
   GetUserGroupCollection(userName)
@@ -76,15 +81,15 @@ class App extends React.Component {
       <div className="container bxPageWrapper">
         <PageHeader />
         <TableHeader />
-        <div className="slimScrollDiv" style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
-            <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "750px"}}>
+        <Scrollbars style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "100vh"}}>
+        <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "780px"}}>
             {this.state.Groups.map(function(item,key)
               {
                 return <GroupRow groupInfo = {item} key={key}/>;
               },this)
             }
             </div>
-        </div>
+        </Scrollbars>
       </div>
     );
   }

@@ -43,7 +43,7 @@ class GroupFolder extends React.Component
                         <option value="uploader">Uploader</option>
                     </select>
                 <span className="detailMemRemoveLabel">
-                    <a href="#" onClick={this.RemoveFolder.bind(this,this.state.FolderInfo.FolderId)}>Remove</a>
+                    <a href="javascript:void(0)" onClick={this.RemoveFolder.bind(this,this.state.FolderInfo.FolderId)}>Remove</a>
                 </span>
             </div>
         );

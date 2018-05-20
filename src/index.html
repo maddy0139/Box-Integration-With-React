@@ -7,50 +7,5 @@
     <div id="root"></div>
     <script src="/bundle.js"></script>
   </body>
-  <script type="text/javascript">
-    $(document).ready(function(){
-    
-      // Slim scroll style
-      $('.bxDashboardAccordion').slimscroll({
-        height: '750px',
-        alwaysVisible: true,
-        allowPageScroll: true
-      });
-      $("#success-alert").hide();
-      
-      // Share folder Popup make screen height
-      function shareFolderPopupHeight() {
-          $("#folderListonPopup").css({"max-height":$(window).height()-200,"overflow-y":"auto"});
-      }
-      shareFolderPopupHeight();
-      
-      $(window).resize(function(){
-        shareFolderPopupHeight();
-      });
-      
-      
-      
-      function tabActive() {
-        $(".bxDashboardAccordion > .panel").each(function(){
-          var i=0;
-          
-          $(this).find(".panel-heading").on("click",function(){
-            
-            $(this).children("a").each(function(){
-              if(($(this).attr("aria-expanded"))=="true") {
-                i=1;
-              }
-            });
-            if(i==1) {
-              $(this).addClass("active");
-            } else {
-              $(this).removeClass("active");
-            }
-          });
-        });
-      }
-      setTimeout(function(){ tabActive(); }, 2000);
-      
-    });
     </script>
 </html>

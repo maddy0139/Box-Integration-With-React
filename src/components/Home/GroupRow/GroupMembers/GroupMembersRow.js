@@ -2,7 +2,7 @@ import React from 'react';
 import GroupMemberTop from './GroupMemberTop';
 import GroupMembersHeader from './GroupMembersHeader';
 import GroupMember from './GroupMember';
-import BoxHelper from '../../../Helper/BoxHelper';
+import BoxHelper from '../../../../Helper/BoxHelper';
 import $ from 'jquery';
 
 class GroupMembersRow extends React.Component
@@ -30,11 +30,11 @@ class GroupMembersRow extends React.Component
     }
     RemoveMember(memberId)
     {
-        const newState = this.state;
-        const index = newState.GroupMembers.findIndex(a=>a.UserId===memberId);
+        const GroupMembers = this.state.GroupMembers;
+        const index = GroupMembers.findIndex(a=>a.UserId===memberId);
         if(index === -1) return;
-        newState.GroupMembers.splice(index,1);
-        this.setState({newState});
+        GroupMembers.splice(index,1);
+        this.setState({GroupMembers});
     }
     SetGroupMembersDetails(members)
     {
