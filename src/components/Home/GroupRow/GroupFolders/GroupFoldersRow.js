@@ -70,7 +70,7 @@ class GroupFoldersRow extends React.Component
                 <div style={{"width":"100%"}}>
                     {this.state.GroupFolders.map(function(item,key)
                         {
-                            return(<GroupFolder FolderInfo={item} key={key} RemoveFolder={this.RemoveFolder}/>);
+                            return(<GroupFolder FolderInfo={item} key={item.FolderId} RemoveFolder={this.RemoveFolder}/>);
                         },this)
                     }
                 </div>

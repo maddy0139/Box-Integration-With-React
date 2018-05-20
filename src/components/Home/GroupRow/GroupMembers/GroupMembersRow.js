@@ -62,7 +62,7 @@ class GroupMembersRow extends React.Component
                     {this.state.GroupMembers.map(function(item,key)
                         {
                             return(
-                                <GroupMember MemberInfo={item} key={key} RemoveMember={this.RemoveMember}/>
+                                <GroupMember MemberInfo={item} key={item.UserId} RemoveMember={this.RemoveMember}/>
                             );
                         },this)
                     }

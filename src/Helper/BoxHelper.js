@@ -94,7 +94,7 @@ BoxHelper.GetFoldersInformation = (folderId) =>
 };*/
 BoxHelper.IsTokenAvailable = () => 
 {
-    BoxHelper.adminToken = "CWSuYckRtkUv6la8WN5LhTfq04iUJpMH";
+    BoxHelper.adminToken = "LKnq2K3kaBNik41eFaeJ63t3ZNSx9gqT";
     let deferred = $.Deferred();
     deferred.resolve(true);
     /*let deferred = $.Deferred();
