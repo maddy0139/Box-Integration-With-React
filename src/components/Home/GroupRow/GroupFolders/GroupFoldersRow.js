@@ -1,4 +1,5 @@
-import React,{PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import GroupFolderTop from './GroupFolderTop';
 import GroupFoldersHeader from './GroupFodlersHeader';
@@ -33,7 +34,7 @@ class GroupFoldersRow extends React.Component
                 $.each(collabInfo,(index,info)=>{
                     BoxHelper.GetFoldersInformation(info.item.id).then(folderInfo =>{
                         this.SetFoldersDetails(folderInfo,info,collabInfo.length);
-                    })
+                    });
                 });
             }
             else{
@@ -80,8 +81,8 @@ class GroupFoldersRow extends React.Component
 }
 GroupFoldersRow.propTypes = {
     //dispatch: PropTypes.func.isRequired,
-    courses: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    groupInfo: PropTypes.object.isRequired,
+    SetFolderCount:PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

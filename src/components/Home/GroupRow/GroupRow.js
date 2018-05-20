@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import GroupDetails from './GroupDetails';
 import GroupMembersRow from './GroupMembers/GroupMembersRow';
 import GroupFoldersRow from './GroupFolders/GroupFoldersRow';
@@ -8,7 +9,7 @@ class GroupRow extends React.Component
 {
     constructor(props,context)
     {
-        super(props,context)
+        super(props,context);
         this.state = {
             GroupId : this.props.groupInfo.groupId,
             GroupName: this.props.groupInfo.groupName,
@@ -81,6 +82,7 @@ class GroupRow extends React.Component
 GroupRow.propTypes = {
     //dispatch: PropTypes.func.isRequired,
     courses: PropTypes.array.isRequired,
+    groupInfo:PropTypes.object.isRequired,
     //createCourse: PropTypes.func.isRequired,
     actions: PropTypes.object.isRequired
 };
