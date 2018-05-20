@@ -5,7 +5,7 @@ class PageHeader extends React.Component
     render()
     {
         return(
-            <div className="bxDashHead">
+            <div className="bxDashHead" style={{"marginLeft":"15px"}}>
 				<div className="bxDashHeadLHS">
 					<span className="bxDashHeadLHSTitle">
 						Groups

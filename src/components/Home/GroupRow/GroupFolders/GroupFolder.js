@@ -8,10 +8,22 @@ class GroupFolder extends React.Component
         this.state = {
             FolderInfo: this.props.FolderInfo
         };
+        this.OnPermissionChange = this.OnPermissionChange.bind(this);
+        this.RemoveFolder = this.RemoveFolder.bind(this);
     }
     componentDidMount()
     {
 
+    }
+    OnPermissionChange(event)
+    {
+        let MemberInfo = Object.assign({}, this.state.FolderInfo);
+        MemberInfo.GroupRole = event.target.value;
+        this.setState({MemberInfo});
+    }
+    RemoveFolder(folderId)
+    {
+        this.props.RemoveFolder(folderId);
     }
     render()
     {
@@ -21,7 +33,7 @@ class GroupFolder extends React.Component
                 <span className="detailFoldOwnLabel" data-bind="text:FolderOwner">{this.state.FolderInfo.FolderOwner}</span>
                 <span className="detailFoldModiLabel" data-bind="text:LastModified">{this.state.FolderInfo.LastModified}</span>
                 <span className="detailFoldSizeLabel"></span>
-                    <select value={this.state.FolderInfo.GroupRole}>
+                    <select value={this.state.FolderInfo.GroupRole} onChange={this.OnPermissionChange}>
                         <option value="editor">Editor</option>
                         <option value="viewer">Viewer</option>
                         <option value="previewer">Previewer</option>
@@ -31,7 +43,7 @@ class GroupFolder extends React.Component
                         <option value="uploader">Uploader</option>
                     </select>
                 <span className="detailMemRemoveLabel">
-                    <a href="javascript:void(0)">Remove</a>
+                    <a href="#" onClick={this.RemoveFolder.bind(this,this.state.FolderInfo.FolderId)}>Remove</a>
                 </span>
             </div>
         );

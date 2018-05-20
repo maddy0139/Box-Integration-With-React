@@ -8,6 +8,18 @@ class GroupMember extends React.Component
         this.state = {
             MemberInfo:this.props.MemberInfo
         };
+        this.OnPermissionChange = this.OnPermissionChange.bind(this);
+        this.RemoveMember = this.RemoveMember.bind(this);
+    }
+    OnPermissionChange(event)
+    {
+        let MemberInfo = Object.assign({}, this.state.MemberInfo);
+        MemberInfo.selectedPermission = event.target.value;
+        this.setState({MemberInfo});
+    }
+    RemoveMember(memberId)
+    {
+        this.props.RemoveMember(memberId);
     }
     render()
     {
@@ -16,13 +28,13 @@ class GroupMember extends React.Component
                 <span className="detailMemNameLabel">{this.state.MemberInfo.Name}</span>
                 <span className="detailMemEmailLabel">{this.state.MemberInfo.Email}</span>
                 <span className="detailMemPermiLabel">
-                    <select value={this.state.MemberInfo.selectedPermission}>
+                    <select value={this.state.MemberInfo.selectedPermission} onChange={this.OnPermissionChange}>
                         <option value="admin">Admin</option>
                         <option value="member">Member</option>
                     </select>
                 </span>
                 <span className="detailMemRemoveLabel">
-                    <a href="javascript:void(0)">Remove</a>
+                    <a href="javascript:void(0)" onClick={this.RemoveMember.bind(this,this.state.MemberInfo.UserId)}>Remove</a>
                 </span>
             </div>
         );

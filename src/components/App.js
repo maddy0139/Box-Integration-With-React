@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import BoxHelper from './Helper/BoxHelper';
 import PageHeader from './Home/PageHeader';
@@ -8,9 +9,9 @@ import GroupRow from './Home/GroupRow/GroupRow';
 import $ from 'jquery';
 let moment = require('moment');
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+class App extends React.Component {
+  constructor(props,context) {
+    super(props,context);
     this.state = {
       Groups:[]
     };
@@ -75,11 +76,11 @@ class App extends Component {
       <div className="container bxPageWrapper">
         <PageHeader />
         <TableHeader />
-        <div className="slimScrollDiv" style={{"position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
+        <div className="slimScrollDiv" style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
             <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "750px"}}>
             {this.state.Groups.map(function(item,key)
               {
-                return (<GroupRow groupInfo = {item} key={key}/>);
+                return <GroupRow groupInfo = {item} key={key}/>;
               },this)
             }
             </div>
@@ -88,5 +89,7 @@ class App extends Component {
     );
   }
 }
-
-export default App;
+App.PropTypes = {
+  children: PropTypes.object.isRequired  
+};
+export default (App);

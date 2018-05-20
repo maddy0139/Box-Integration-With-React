@@ -24,7 +24,6 @@ BoxHelper.GetAdminUser = () => {
     deferred.resolve("mahendra.gohel@spadeworx.com");
     return deferred.promise();
     /*let siteUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin User'";
-
     return $.ajax({
         url: siteUrl,
         method: 'GET',
@@ -73,7 +72,7 @@ BoxHelper.GetFoldersInformation = (folderId) =>
     .then(folderInfo => folderInfo);
 }
 
-BoxHelper.serverDateTime = (date) => {
+/*BoxHelper.serverDateTime = (date) => {
     let dt = date || new Date();
     let context = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
     let web = context.get_web();
@@ -91,10 +90,10 @@ BoxHelper.serverDateTime = (date) => {
             deferred.reject();
         });
     return deferred.promise();
-};
+};*/
 BoxHelper.IsTokenAvailable = () => 
 {
-    BoxHelper.adminToken = "5HrnsG4YB1is19cThPowdIQRjxuVemG7";
+    BoxHelper.adminToken = "G9pyKR0iBTU1aXDuaRpdSysHTmAiDXJ6";
     let deferred = $.Deferred();
     deferred.resolve(true);
     /*let deferred = $.Deferred();
@@ -106,7 +105,6 @@ BoxHelper.IsTokenAvailable = () =>
                 let minuteDiff = parseInt(currentDate.diff(tokenDate, 'm'));
                 let hourDiff = parseInt(currentDate.diff(tokenDate, 'h'));
                 let dayDiff = parseInt(currentDate.diff(tokenDate, 'd'));
-
                 if (minuteDiff < 55 && hourDiff === 0 && dayDiff === 0) {
                     BoxHelper.adminToken = data.value[0].Value;
                     deferred.resolve(true);

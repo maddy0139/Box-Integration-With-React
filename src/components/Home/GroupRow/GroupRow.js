@@ -6,15 +6,48 @@ import GroupFoldersRow from './GroupFolders/GroupFoldersRow';
 
 class GroupRow extends React.Component
 {
-    constructor(props)
+    constructor(props,context)
     {
-        super(props);
+        super(props,context)
         this.state = {
-
+            GroupId : this.props.groupInfo.groupId,
+            GroupName: this.props.groupInfo.groupName,
+            FolderCount:'',
+            MemberCount:'',
+            GroupAdmin:'',
+            GroupAdminCount:0
         };
+        this.SetFolderCount = this.SetFolderCount.bind(this);
+        this.SetMemberCount = this.SetMemberCount.bind(this);
+        this.SetGroupAdmin = this.SetGroupAdmin.bind(this);        
     }
-    groupRow(group, index) {
-        return <div key={index}>{group}</div>;
+    
+    SetFolderCount(count)
+    {
+        this.setState({FolderCount:count});
+    }
+    SetMemberCount(count)
+    {
+        this.setState({MemberCount:count});
+    }
+    SetGroupAdmin(member)
+    {
+        let adminCount = this.state.GroupAdminCount;
+        let admin = '';
+        adminCount++;
+        this.setState({GroupAdminCount:adminCount});
+        if(adminCount > 1)
+        {
+            admin = member + " + "+(adminCount-1)+" More";
+        }
+        else
+        {
+            admin = member;
+        }
+        this.setState({GroupAdmin:admin});
+    }
+    courseRow(course, index) {
+        return <div key={index}>{course.Name}</div>;
     }
     render()
     {
@@ -25,24 +58,35 @@ class GroupRow extends React.Component
                         <span data-toggle="collapse" data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId}>{this.props.groupInfo.groupName}</span>
                     </a>
                     <span className="bxDashAdminCol">
-                        
+                        {this.state.GroupAdmin}
                     </span>
                     <a className="bxDashMemberCol">
-                        <span data-toggle="collapse" data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Members"}>12</span>
+                        <span data-toggle="collapse" data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Members"}>{this.state.MemberCount}</span>
                     </a>
                     <a className="bxDashFoldersCol">
-                        <span data-toggle="collapse"  data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Folders"}>6</span>
+                        <span data-toggle="collapse"  data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Folders"}>{this.state.FolderCount}</span>
                     </a>
                     <span className="bxDashDateCol">
                     {this.props.groupInfo.groupCreatedDate}
                     </span>
                 </div>
+                {this.props.courses.map(this.courseRow)}
                 <GroupDetails groupInfo = {this.props.groupInfo}/>
-                <GroupMembersRow groupInfo = {this.props.groupInfo}/>
-                <GroupFoldersRow groupInfo = {this.props.groupInfo}/>
+                <GroupMembersRow groupInfo = {this.props.groupInfo} SetMemberCount={this.SetMemberCount} SetGroupAdmin={this.SetGroupAdmin}/>
+                <GroupFoldersRow groupInfo = {this.props.groupInfo} SetFolderCount={this.SetFolderCount}/>
 			</div>
         );
     }
 }
-
-export default (GroupRow);
+GroupRow.propTypes = {
+    //dispatch: PropTypes.func.isRequired,
+    courses: PropTypes.array.isRequired,
+    //createCourse: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired
+};
+function mapStateToProps(state, ownProps) {
+    return {
+        courses: state.courses
+    };
+}
+export default connect(mapStateToProps)(GroupRow);

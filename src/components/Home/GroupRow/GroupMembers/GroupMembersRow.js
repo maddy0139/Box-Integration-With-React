@@ -15,7 +15,10 @@ class GroupMembersRow extends React.Component
             GroupId:this.props.groupInfo.groupId,
             GroupName:this.props.groupInfo.groupName
         };
+        this.RemoveMember = this.RemoveMember.bind(this);
     }
+
+
     componentDidMount()
     {
         BoxHelper.GetGroupUsers(this.state.GroupId).then(members=>{
@@ -25,10 +28,22 @@ class GroupMembersRow extends React.Component
     componentWillReceiveProps(nextProps)
     {
     }
-
+    RemoveMember(memberId)
+    {
+        const newState = this.state;
+        const index = newState.GroupMembers.findIndex(a=>a.UserId===memberId);
+        if(index === -1) return;
+        newState.GroupMembers.splice(index,1);
+        this.setState({newState});
+    }
     SetGroupMembersDetails(members)
     {
+        this.props.SetMemberCount(members.length);
         $.each(members,(index,member)=>{
+            if(member.role === 'admin')
+            {
+                this.props.SetGroupAdmin(member.user.name);
+            }
             let arrayvar = this.state.GroupMembers.slice();
             arrayvar.push({"GroupIndex":index,"GroupMembershipId":member.id,"GroupId":this.state.GroupId,
                             "Name":member.user.name,"Email":member.user.login,
@@ -47,7 +62,7 @@ class GroupMembersRow extends React.Component
                     {this.state.GroupMembers.map(function(item,key)
                         {
                             return(
-                                <GroupMember MemberInfo={item} key={key}/>
+                                <GroupMember MemberInfo={item} key={key} RemoveMember={this.RemoveMember}/>
                             );
                         },this)
                     }
