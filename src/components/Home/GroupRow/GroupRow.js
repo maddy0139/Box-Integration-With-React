@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import GroupDetails from './GroupDetails';
 import GroupMembersRow from './GroupMembers/GroupMembersRow';
 import GroupFoldersRow from './GroupFolders/GroupFoldersRow';
-
+import CreateGroup from '../Create Group/CreateGroup';
+import BoxHelper from '../../../Helper/BoxHelper';
+let moment = require('moment');
 class GroupRow extends React.Component
 {
     constructor(props,context)
@@ -16,20 +18,71 @@ class GroupRow extends React.Component
             FolderCount:'',
             MemberCount:'',
             GroupAdmin:'',
-            GroupAdminCount:0
+            GroupAdminCount:0,
+            GroupFolders:[],
+            GroupMembers:[],
+            IsLoading:true
         };
-        this.SetFolderCount = this.SetFolderCount.bind(this);
-        this.SetMemberCount = this.SetMemberCount.bind(this);
         this.SetGroupAdmin = this.SetGroupAdmin.bind(this);        
     }
-    
-    SetFolderCount(count)
+    componentDidMount()
     {
-        this.setState({FolderCount:count});
+        this.GetGroupCollaboration(this.state.GroupId);
+        this.GetGroupMembers(this.state.GroupId);
     }
-    SetMemberCount(count)
+    GetGroupCollaboration(groupId)
     {
-        this.setState({MemberCount:count});
+        BoxHelper.GetCollaborationsForGroup(this.state.GroupId).then(collabInfo =>{
+            if(collabInfo.length >0)
+            {
+                $.each(collabInfo,(index,info)=>{
+                    BoxHelper.GetFoldersInformation(info.item.id).then(folderInfo =>{
+                        this.SetFoldersDetails(folderInfo,info,collabInfo.length);
+                        this.setState({IsLoading:false});
+                        this.setState({FolderCount:collabInfo.length});
+                    });
+                });
+            }
+            else
+            {
+                this.setState({FolderCount:collabInfo.length}); 
+                this.setState({IsLoading:false});           
+            }
+            
+        });
+    }
+    GetGroupMembers(groupId)
+    {
+        BoxHelper.GetGroupUsers(this.state.GroupId).then(members=>{
+            this.SetGroupMembersDetails(members);
+        });
+    }
+    SetFoldersDetails(folderInfo,info,folderCount)
+    {
+        let dt = moment(folderInfo.modified_at);
+        let arrayvar = this.state.GroupFolders.slice();
+        arrayvar.push({"FolderCollabId":info.id,"FolderId":folderInfo.id,"GroupId":this.state.GroupId,
+                        "Name":folderInfo.name,"GroupName":this.state.GroupName,
+                    "FolderOwner":folderInfo.owned_by.name,"LastModified":dt.format("DD MMM YYYY"),
+                    "FolderSize":parseInt(folderInfo.size / 1024),"GroupRole":info.role,"SelectedGroupRole":info.role});
+        this.setState({GroupFolders:arrayvar});
+        
+    }
+    SetGroupMembersDetails(members)
+    {
+        this.setState({MemberCount:members.length});
+        $.each(members,(index,member)=>{
+            if(member.role === 'admin')
+            {
+                this.SetGroupAdmin(member.user.name);
+            }
+            let arrayvar = this.state.GroupMembers.slice();
+            arrayvar.push({"GroupIndex":index,"GroupMembershipId":member.id,"GroupId":this.state.GroupId,
+                            "Name":member.user.name,"Email":member.user.login,
+                            "UserId":member.user.id,"GroupName":this.state.GroupName,
+                            "selectedPermission":member.role});
+            this.setState({GroupMembers:arrayvar});
+        });
     }
     SetGroupAdmin(member)
     {
@@ -48,11 +101,12 @@ class GroupRow extends React.Component
         this.setState({GroupAdmin:admin});
     }
     courseRow(course, index) {
-        return <div key={index}>{course.Name}</div>;
+        return <div key={index}>{course}</div>;
     }
     render()
     {
         return(
+            
             <div className="panel panel-default bxDashRowWrap">
                 <div className="panel-heading">
                     <a className="bxDashGroupCol">
@@ -71,10 +125,9 @@ class GroupRow extends React.Component
                     {this.props.groupInfo.groupCreatedDate}
                     </span>
                 </div>
-                {this.props.courses.map(this.courseRow)}
                 <GroupDetails groupInfo = {this.props.groupInfo}/>
-                <GroupMembersRow groupInfo = {this.props.groupInfo} SetMemberCount={this.SetMemberCount} SetGroupAdmin={this.SetGroupAdmin}/>
-                <GroupFoldersRow groupInfo = {this.props.groupInfo} SetFolderCount={this.SetFolderCount}/>
+                <GroupMembersRow groupInfo = {this.props.groupInfo} GroupMembers = {this.state.GroupMembers}/>
+                <GroupFoldersRow groupInfo = {this.props.groupInfo} GroupFolders = {this.state.GroupFolders}/>       
 			</div>
         );
     }

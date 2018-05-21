@@ -11,9 +11,9 @@ class GroupFolder extends React.Component
         this.OnPermissionChange = this.OnPermissionChange.bind(this);
         this.RemoveFolder = this.RemoveFolder.bind(this);
     }
-    componentDidMount()
+    componentWillReceiveProps(nextProps)
     {
-
+        this.setState({FolderInfo:nextProps.FolderInfo});
     }
     OnPermissionChange(event)
     {

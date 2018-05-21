@@ -11,6 +11,10 @@ class GroupMember extends React.Component
         this.OnPermissionChange = this.OnPermissionChange.bind(this);
         this.RemoveMember = this.RemoveMember.bind(this);
     }
+    componentWillReceiveProps(nextProps)
+    {
+        this.setState({MemberInfo:nextProps.MemberInfo});
+    }
     OnPermissionChange(event)
     {
         let MemberInfo = Object.assign({}, this.state.MemberInfo);

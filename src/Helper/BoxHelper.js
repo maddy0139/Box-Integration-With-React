@@ -1,13 +1,13 @@
 
 import BoxSdk from '../BoxSdk/sdk';
-import * as $ from 'jquery';
+import 'jquery-slimscroll';
 let moment = require('moment');
 
 const BoxHelper = {
-    Box : "",
+    Box: "",
     adminToken: "",
-    adminClient:"",
-    userClient:""
+    adminClient: "",
+    userClient: ""
 };
 BoxHelper.Box = new BoxSdk();
 
@@ -33,44 +33,38 @@ BoxHelper.GetAdminUser = () => {
 };
 
 
-BoxHelper.GetUserId = (userLogin) =>
-{
+BoxHelper.GetUserId = (userLogin) => {
     return BoxHelper.adminClient.users.getEnterpriseUsers({ params: { filter_term: userLogin } })//_spPageContextInfo.userEmail
-    .then(result =>result.entries[0]);
+        .then(result => result.entries[0]);
 };
 
-BoxHelper.GetGroupMembershipsOfUser = (userId,offset,limit) =>
-{
-    return BoxHelper.adminClient.users.getGroupMemberships({ userId: userId, params: { fields: "group,role",limit:limit.toString(),offset:offset.toString()} })
-    .then(result=>result.entries);
+BoxHelper.GetGroupMembershipsOfUser = (userId, offset, limit) => {
+    return BoxHelper.adminClient.users.getGroupMemberships({ userId: userId, params: { fields: "group,role", limit: limit.toString(), offset: offset.toString() } })
+        .then(result => result.entries);
 };
 
 
-BoxHelper.GetGroupInfo = (groupId)=>
-{
+BoxHelper.GetGroupInfo = (groupId) => {
     return BoxHelper.userClient.groups.get({ groupId: groupId, params: { fields: "invitability_level,item,user,created_by,created_at,accessible_by,description" } })
-    .then(result=>result);
+        .then(result => result);
 };
 
 
-BoxHelper.GetGroupUsers = (groupId) =>
-{
+BoxHelper.GetGroupUsers = (groupId) => {
     return BoxHelper.adminClient.groups.getMembershipsForGroup({ groupId: groupId, params: { fields: "id,user,role" } })
-    .then(members=>members.entries);
+        .then(members => members.entries);
 };
 
 
-BoxHelper.GetCollaborationsForGroup = (groupId) =>
-{
+BoxHelper.GetCollaborationsForGroup = (groupId) => {
     return BoxHelper.userClient.groups.getCollaborationsForGroup({ groupId: groupId, params: { fields: "item,created_by,created_at,accessible_by" } })
-    .then(collabInfo =>collabInfo.entries);
+        .then(collabInfo => collabInfo.entries);
 };
 
 
-BoxHelper.GetFoldersInformation = (folderId) =>
-{
+BoxHelper.GetFoldersInformation = (folderId) => {
     return BoxHelper.adminClient.folders.get({ folderId: folderId, params: { fields: "name,modified_at,id,owned_by,size" } })
-    .then(folderInfo => folderInfo);
+        .then(folderInfo => folderInfo);
 };
 
 /*BoxHelper.serverDateTime = (date) => {
@@ -92,9 +86,8 @@ BoxHelper.GetFoldersInformation = (folderId) =>
         });
     return deferred.promise();
 };*/
-BoxHelper.IsTokenAvailable = () => 
-{
-    BoxHelper.adminToken = "LKnq2K3kaBNik41eFaeJ63t3ZNSx9gqT";
+BoxHelper.IsTokenAvailable = () => {
+    BoxHelper.adminToken = "a4Vh4cHJAW2s4Wyi1PzUKXJMudmkVky1";
     let deferred = $.Deferred();
     deferred.resolve(true);
     /*let deferred = $.Deferred();
@@ -120,41 +113,46 @@ BoxHelper.IsTokenAvailable = () =>
     return deferred.promise();
 };
 
-BoxHelper.OnReadyJqueryFunctions =()=>
-{
-      $("#success-alert").hide();
-      
-      // Share folder Popup make screen height
-      function shareFolderPopupHeight() {
-          $("#folderListonPopup").css({"max-height":$(window).height()-200,"overflow-y":"auto"});
-      }
-      shareFolderPopupHeight();
-      
-      $(window).resize(function(){
+BoxHelper.OnReadyJqueryFunctions = () => {
+    // Slim scroll style
+    $('.bxDashboardAccordion').slimscroll({
+        height: '750px',
+        alwaysVisible: true,
+        allowPageScroll: true
+    });
+    $("#success-alert").hide();
+
+    // Share folder Popup make screen height
+    function shareFolderPopupHeight() {
+        $("#folderListonPopup").css({ "max-height": $(window).height() - 200, "overflow-y": "auto" });
+    }
+    shareFolderPopupHeight();
+
+    $(window).resize(function () {
         shareFolderPopupHeight();
-      });
-      
-      
-      
-      function tabActive() {
-        $(".bxDashboardAccordion > .panel").each(function(){
-          var i=0;
-          
-          $(this).find(".panel-heading").on("click",function(){
-            
-            $(this).children("a").each(function(){
-              if(($(this).attr("aria-expanded"))=="true") {
-                i=1;
-              }
+    });
+
+
+
+    function tabActive() {
+        $(".bxDashboardAccordion > .panel").each(function () {
+            var i = 0;
+
+            $(this).find(".panel-heading").on("click", function () {
+
+                $(this).children("a").each(function () {
+                    if (($(this).attr("aria-expanded")) == "true") {
+                        i = 1;
+                    }
+                });
+                if (i == 1) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
             });
-            if(i==1) {
-              $(this).addClass("active");
-            } else {
-              $(this).removeClass("active");
-            }
-          });
         });
-      }
-      setTimeout(function(){ tabActive(); }, 2000);
+    }
+    setTimeout(function () { tabActive(); }, 2000);
 };
 export default BoxHelper;

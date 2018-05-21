@@ -17,30 +17,18 @@ class GroupFoldersRow extends React.Component
     {
         super(props, context);
         this.state = {
-            GroupFolders:[],
+            GroupFolders:this.props.GroupFolders,
             GroupId : this.props.groupInfo.groupId,
             GroupName: this.props.groupInfo.groupName,
             BPA: {title: ""},
-            course: { title: "" }
+            course: { title: "test" }
         };
         this.RemoveFolder = this.RemoveFolder.bind(this);
     }
-    
-    componentDidMount()
+
+    componentWillReceiveProps(nextProps)
     {
-        BoxHelper.GetCollaborationsForGroup(this.state.GroupId).then(collabInfo =>{
-            if(collabInfo.length >0)
-            {
-                $.each(collabInfo,(index,info)=>{
-                    BoxHelper.GetFoldersInformation(info.item.id).then(folderInfo =>{
-                        this.SetFoldersDetails(folderInfo,info,collabInfo.length);
-                    });
-                });
-            }
-            else{
-                this.props.SetFolderCount(collabInfo.length);                
-            }
-        });
+        this.setState({GroupFolders:nextProps.GroupFolders});
     }
     RemoveFolder(folderId)
     {
@@ -49,17 +37,6 @@ class GroupFoldersRow extends React.Component
         if(index === -1) return;
         newState.GroupFolders.splice(index,1);
         this.setState({newState});
-    }
-    SetFoldersDetails(folderInfo,info,folderCount)
-    {
-        this.props.SetFolderCount(folderCount);
-        let dt = moment(folderInfo.modified_at);
-        let arrayvar = this.state.GroupFolders.slice();
-        arrayvar.push({"FolderCollabId":info.id,"FolderId":folderInfo.id,"GroupId":this.state.GroupId,
-                        "Name":folderInfo.name,"GroupName":this.state.GroupName,
-                    "FolderOwner":folderInfo.owned_by.name,"LastModified":dt.format("DD MMM YYYY"),
-                    "FolderSize":parseInt(folderInfo.size / 1024),"GroupRole":info.role,"SelectedGroupRole":info.role});
-        this.setState({GroupFolders:arrayvar});
     }
 
     render()
@@ -97,4 +74,4 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(courseActions, dispatch)
     };
 }
-export default (GroupFoldersRow);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupFoldersRow);

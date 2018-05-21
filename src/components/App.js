@@ -8,6 +8,7 @@ import TableHeader from './Home/TableHeader';
 import GroupRow from './Home/GroupRow/GroupRow';
 import $ from 'jquery';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import CreateGroup from './Home/Create Group/CreateGroup';
 let moment = require('moment');
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
   }
   componentDidMount() 
   {
+    BoxHelper.OnReadyJqueryFunctions();    
     BoxHelper.IsTokenAvailable().then(data => {
       BoxHelper.adminClient = new BoxHelper.Box.BasicBoxClient({ accessToken: BoxHelper.adminToken });
       BoxHelper.userClient = new BoxHelper.Box.BasicBoxClient({ accessToken: BoxHelper.adminToken });
@@ -27,10 +29,6 @@ class App extends React.Component {
         this.GetUserGroupCollection(user);
       });
     });
-  }
-  componentDidUpdate()
-  {
-    //BoxHelper.OnReadyJqueryFunctions();
   }
 
   GetUserGroupCollection(userName)
@@ -67,13 +65,6 @@ class App extends React.Component {
                    "groupCreatedDate":groupCreatedDate,
                    "groupInviteLevel":groupInviteLevel});
     this.setState({Groups:arrayvar});
-    /*this.setState((prevState) => {
-      // Important: read `prevState` instead of `this.state` when updating.
-      return {Groups: prevState.Groups.push(arrayvar)}
-    });
-
-    var Groups = [...this.state.Groups, arrayvar];
-    this.setState({Groups})*/
   }
 
   render() {
@@ -81,15 +72,17 @@ class App extends React.Component {
       <div className="container bxPageWrapper">
         <PageHeader />
         <TableHeader />
-        <Scrollbars style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "100vh"}}>
-        <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "780px"}}>
-            {this.state.Groups.map(function(item,key)
-              {
-                return <GroupRow groupInfo = {item} key={key}/>;
-              },this)
-            }
-            </div>
-        </Scrollbars>
+        <div className="slimScrollDiv" style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
+          <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "750px"}}>
+              <Scrollbars style={{ height: 750 }} autoHide autoHideDuration={200} autoHideTimeout={1000}>
+              {this.state.Groups.map(function(item,key)
+                {
+                  return <GroupRow groupInfo = {item} key={key}/>;
+                },this)
+              }</Scrollbars>
+          </div>
+        </div>
+        <CreateGroup/>
       </div>
     );
   }

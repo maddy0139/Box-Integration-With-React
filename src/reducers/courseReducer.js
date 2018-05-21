@@ -5,8 +5,7 @@ export default function courseReducer(state = [], action) {
         case types.CREATE_COURSE:
             //state.push(aciton.course);
             //return state;
-            return [...state,Object.assign({}, action.course)
-            ];
+            return [...state,Object.assign({}, action.course)];
         default:
             return state;
     }
