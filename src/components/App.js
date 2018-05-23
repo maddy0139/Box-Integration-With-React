@@ -86,11 +86,13 @@ class App extends React.Component {
         <TableHeader />
         <div className="slimScrollDiv" style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
           <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "750px"}}>
+              <Scrollbars style={{height: 750}} autoHide autoHideTimeout={1000} autoHideDuration={200}>
               {this.state.Groups.map(function(item,key)
                 {
                   return <GroupRow groupInfo = {item} key={key}/>;
                 },this)
               }
+              </Scrollbars>
           </div>
         </div>
         <CreateGroup/>
