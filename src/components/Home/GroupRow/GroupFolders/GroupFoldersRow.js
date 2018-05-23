@@ -7,7 +7,7 @@ import GroupFolder from './GroupFolder';
 import BoxHelper from '../../../../Helper/BoxHelper';
 import $ from 'jquery';
 import {bindActionCreators} from 'redux';
-import * as courseActions from '../../../../actions/courseActions';
+import * as courseActions from '../../../../actions/groupActions';
 
 let moment = require('moment');
 

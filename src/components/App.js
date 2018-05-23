@@ -9,13 +9,18 @@ import GroupRow from './Home/GroupRow/GroupRow';
 import $ from 'jquery';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import CreateGroup from './Home/Create Group/CreateGroup';
+import Loader from './Home/Loader';
+import FadeIn from 'react-fade-in';
+import * as courseActions from '../actions/groupActions';
 let moment = require('moment');
 
 class App extends React.Component {
   constructor(props,context) {
     super(props,context);
     this.state = {
-      Groups:[]
+      Groups:[],
+      IsLoading:"none",
+      GroupLoaded:[]
     };
   }
   componentDidMount() 
@@ -30,7 +35,14 @@ class App extends React.Component {
       });
     });
   }
-
+  componentWillReceiveProps(nextProps)
+  {
+    if(nextProps.groupLoaded.length === 20)
+    {
+      console.log(new Date());
+      this.setState({IsLoading:"block"});
+    }
+  }
   GetUserGroupCollection(userName)
   {
     BoxHelper.GetUserId(userName).then(user =>{
@@ -66,7 +78,7 @@ class App extends React.Component {
                    "groupInviteLevel":groupInviteLevel});
     this.setState({Groups:arrayvar});
   }
-
+  
   render() {
     return (
       <div className="container bxPageWrapper">
@@ -74,17 +86,32 @@ class App extends React.Component {
         <TableHeader />
         <div className="slimScrollDiv" style={{"marginLeft":"15px","position": "relative", "overflow": "hidden", "width": "auto", "height": "750px"}}>
           <div className="panel-group bxDashboardAccordion" id="accordion" style={{"overflow": "hidden", "width": "auto", "height": "750px"}}>
-              <Scrollbars style={{ height: 750 }} autoHide autoHideDuration={200} autoHideTimeout={1000}>
               {this.state.Groups.map(function(item,key)
                 {
                   return <GroupRow groupInfo = {item} key={key}/>;
                 },this)
-              }</Scrollbars>
+              }
           </div>
         </div>
         <CreateGroup/>
+        <Loader IsLoading={this.state.IsLoading}/>
       </div>
     );
   }
 }
-export default (App);
+App.propTypes = {
+  //dispatch: PropTypes.func.isRequired,
+  groupLoaded:PropTypes.array.isRequired,
+  groupOffset:PropTypes.object.isRequired,   
+  
+  //createCourse: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired
+};
+function mapStateToProps(state, ownProps) {
+  return {
+    groupLoaded: state.groupLoaded,
+    groupOffset:state.groupOffset   
+    
+  };
+}
+export default connect(mapStateToProps)(App);

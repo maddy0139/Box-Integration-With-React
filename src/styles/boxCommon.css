@@ -1,22 +1,4 @@
-﻿@font-face {
-    font-family: 'ProximaNova-Regular';
-	src: url('./fonts/proximanova-regular-webfont.eot') format('eot'),
-         url('./fonts/proximanova-regular-webfont.svg') format('svg'),
-		 url('./fonts/proximanova-regular-webfont.ttf') format('ttf'),
-		 url('./fonts/proximanova-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'ProximaNova-Bold';
-    src: url('./fonts/proximanova-bold-webfont.woff') format('woff'),
-         url('./fonts/proximanova-bold-webfont.ttf') format('ttf'),
-		 url('./fonts/proximanova-bold-webfont.svg') format('svg'),
-		 url('./fonts/proximanova-bold-webfont.eot') format('eot');
-    font-weight: normal;
-    font-style: normal;
-}
-select::-ms-expand {
+﻿select::-ms-expand {
     display: none;
 }
 a:hover {
@@ -230,7 +212,7 @@ input[type="button"].editBtn {
 }
 .panel-collapse::before {
 	content:"";
-	background:url("./images/accordionTopArrow.png");
+	background:url("../../../SiteAssets/Box/images/accordionTopArrow.png");
 	position: absolute;
     top: -13px;
     left: 40px;
@@ -655,7 +637,7 @@ ul.bxFolderBreadCrumb .detailFoldNameLabel:hover,
 }
 .boxLoader::after {
     content: " ";
-    background: url("./images/boxLoader.gif");
+    background: url("/sites/Box/Style Library/Box/images/boxLoader.gif");
     background-repeat:no-repeat;
     position: fixed;
     left: 50%;
@@ -719,13 +701,8 @@ Folder View Style
 }
 .legend {
     display: inline-block;
-     border: 1px solid #ccc;
-    padding: 7px 10px;
     font-size: 13px;
     margin: 0 15px 15px 0;
-  /*  background: url("../images/boxSprite.png") no-repeat 4px center;
-    background-size: 26px;
-    padding-left: 33px;*/
 }
 .clscroll.corner-header th { height: 201px; width:345px; vertical-align:top; border-right: 2px solid #5c5c5c; }
 .clscroll.row-headers th { 
@@ -740,7 +717,7 @@ Folder View Style
 	/*background:url("../images/folderIcon.png") no-repeat 15px center;
 	padding-left: 40px;*/
 }
-.clscroll.column-headers th { height:201px; }
+.clscroll.column-headers th { height:202px; }
 .clscroll.table-content td { padding:15px 0; text-align:center;}
 .clscroll.table-content td select {
 	font-size: 12px;
@@ -775,18 +752,20 @@ Folder View Style
 }
 .row-headers {
     max-height: 600px;
-	border-bottom:1px solid #ddd;
 }
 .table-content {
     max-height:600px;
 }
-.LEditor { background-position:4px -37px; padding:7px 13px; }
-.LCoOwner { background-position:4px -4px; padding:7px 14px; }
-.LViewer { background-position:4px -103px; padding: 7px 14px; margin-right: 0; }
-.LPre { background-position:4px -70px; padding:7px 24px; } 
-.LUploader { background-position:4px -198px; padding:7px 26px; }
-.LViewUpld { background-position:4px -132px; padding: 7px 26px;  margin-right: 0; }
-.LPrevUpld { background-position:4px -165px; padding: 7px 18px; margin-right: 0; } 
+.row > .legend {
+    margin-right: 0;
+    text-align: center;
+}
+.corner-header .row { margin:0 0 15px 0; }
+.corner-header .row:last-child { margin:0; }
+.LRow1 .legend { width: 32%; }
+.LRow2 .legend, .LRow3 .legend { width: 47%; }
+.LRow4 .legend { width: 50%; }
+
 .editorRole mark {
     background-color: transparent;
     width: 100%;
@@ -809,8 +788,10 @@ Folder View Style
 .ViewerIcon, .LViewer i, option[title="Viewer"] { color:#029d44;     font-style: initial; }
 .PreViewerIcon, .LPre i, option[title="Previewer"] { color:#145285;     font-style: initial; }
 .UploaderIcon, .LUploader i, option[title="Uploader"] { color:#666666;     font-style: initial; }
+.NoAccessIcon, option[title="No Access"] { color:#c9c9cc;     font-style: initial; }
 .ViewUploaderIcon, .LViewUpld i, option[title="Viewer Uploader"] { color:#17bdd7;     font-style: initial; }
 .PrevUploaderIcon, .LPrevUpld i, option[title="previewer uploader"] { color:#f9971e;     font-style: initial; }
+.LNoAccess i, option[title="No Access"] {  color:#c9c9cc;     font-style: initial; }
 
 .column-headers, .table-content, .table-content table, .column-headers table {
     max-width:calc(100% - 363px);
@@ -818,7 +799,7 @@ Folder View Style
 .labelTxt {
 	position: absolute;
     right: 15px;
-    bottom: 20px;
+    bottom:10px;
     vertical-align: top;
 	font-weight:bold;
 }
@@ -833,6 +814,7 @@ Folder View Style
     width: calc(100% - 17px);
     font-weight: bold;
 	font-size: 13px;
+	display:inline-block;
 }
 .foldersLabel {
 	display: inline-block;

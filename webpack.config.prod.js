@@ -23,7 +23,13 @@ export default {
     new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('style.css'),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.ProvidePlugin({ // inject ES5 modules as global vars
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: ['popper.js', 'default']
+    })
   ],
   externals: {
     "whatwg-fetch": "fetch",

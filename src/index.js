@@ -7,7 +7,9 @@ import './styles/font-awesome.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import './styles/boxCommon.css';
-
+import './styles/loader.css';
+import './styles/crawler.css';
+import './styles/fontAndImages.css';
 const store = configureStore();
 
 render(    

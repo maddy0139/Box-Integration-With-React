@@ -2,7 +2,6 @@
 import BoxSdk from '../BoxSdk/sdk';
 import 'jquery-slimscroll';
 let moment = require('moment');
-
 const BoxHelper = {
     Box: "",
     adminToken: "",
@@ -11,20 +10,20 @@ const BoxHelper = {
 };
 BoxHelper.Box = new BoxSdk();
 
-/*BoxHelper.GetTokenData = () => {
-    let siteUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin Token'";
+BoxHelper.GetTokenData = () => {
+    let siteUrl = window._spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin Token'";
     return $.ajax({
         url: siteUrl,
         method: 'GET',
         headers: { 'Accept': 'application/json; odata=nometadata' }
     }).then(result => result);
-};*/
+};
 
 BoxHelper.GetAdminUser = () => {
     let deferred = $.Deferred();
     deferred.resolve("mahendra.gohel@spadeworx.com");
-    return deferred.promise();
-    /*let siteUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin User'";
+    return deferred.promise();/*
+    let siteUrl = window._spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Configuration')/items?select=Title,Value,Time&$filter=Title eq 'Admin User'";
     return $.ajax({
         url: siteUrl,
         method: 'GET',
@@ -67,9 +66,9 @@ BoxHelper.GetFoldersInformation = (folderId) => {
         .then(folderInfo => folderInfo);
 };
 
-/*BoxHelper.serverDateTime = (date) => {
+BoxHelper.serverDateTime = (date) => {
     let dt = date || new Date();
-    let context = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
+    let context = new window.SP.ClientContext(window._spPageContextInfo.webAbsoluteUrl);
     let web = context.get_web();
     let timeZone = web.get_regionalSettings().get_timeZone();
     let deferred = $.Deferred();
@@ -85,12 +84,13 @@ BoxHelper.GetFoldersInformation = (folderId) => {
             deferred.reject();
         });
     return deferred.promise();
-};*/
+};
 BoxHelper.IsTokenAvailable = () => {
-    BoxHelper.adminToken = "a4Vh4cHJAW2s4Wyi1PzUKXJMudmkVky1";
+    BoxHelper.adminToken = "oahRy24AWfMNQ87yg6ZUTKNiv8B3Ml4P";
     let deferred = $.Deferred();
     deferred.resolve(true);
-    /*let deferred = $.Deferred();
+    console.log(new Date());/*
+    let deferred = $.Deferred();
     BoxHelper.GetTokenData().then(data => {
         BoxHelper.serverDateTime(new Date()).then(curDate => {
             let currentDate = moment(new Date(curDate));
