@@ -18,6 +18,7 @@ class GroupRow extends React.Component
         this.state = {
             GroupId : this.props.groupInfo.groupId,
             GroupName: this.props.groupInfo.groupName,
+            CollaborationInfo:null,
             FolderCount:'',
             MemberCount:'',
             GroupAdmin:'',
@@ -25,20 +26,37 @@ class GroupRow extends React.Component
             GroupFolders:[],
             GroupMembers:[],
             GroupLoaded: { GroupId: this.props.groupInfo.groupId },
-            IsLoading:true
+            IsLoading:true,
+            IsFolderLoaded:false
         };
-        this.SetGroupAdmin = this.SetGroupAdmin.bind(this);        
+        this.SetGroupAdmin = this.SetGroupAdmin.bind(this); 
+        this.GetGroupFolders = this.GetGroupFolders.bind(this);       
     }
     componentDidMount()
     {
         this.GetGroupCollaboration(this.state.GroupId);
     }
+    GetGroupFolders()
+    {
+        if(this.state.GroupFolders.length === 0)
+        {
+            let count = 0;
+            this.state.CollaborationInfo.map((info,key)=>{
+                BoxHelper.GetFoldersInformation(info.item.id).then(folderInfo =>{
+                    this.SetFoldersDetails(folderInfo,info);
+                    count++;
+                    if(count === this.state.CollaborationInfo.length)
+                    {
+                        this.setState({IsFolderLoaded:true});
+                    }
+                });
+            });
+        }
+    }
     GetGroupCollaboration(groupId)
     {
-        let count = 0;
-
         BoxHelper.GetCollaborationsForGroup(this.state.GroupId).then(collabInfo =>{
-            
+                this.setState({CollaborationInfo:collabInfo});
                 this.setState({FolderCount:collabInfo.length});
                 this.GetGroupMembers(this.state.GroupId);
                 /*
@@ -65,7 +83,7 @@ class GroupRow extends React.Component
             this.props.actions.setGroupOffset({"offset":20});
         });
     }
-    SetFoldersDetails(folderInfo,info,folderCount)
+    SetFoldersDetails(folderInfo,info)
     {
         let dt = moment(folderInfo.modified_at);
         let arrayvar = this.state.GroupFolders.slice();
@@ -125,7 +143,7 @@ class GroupRow extends React.Component
                             <span data-toggle="collapse" data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Members"}>{this.state.MemberCount}</span>
                         </a>
                         <a className="bxDashFoldersCol">
-                            <span data-toggle="collapse"  data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Folders"}>{this.state.FolderCount}</span>
+                            <span data-toggle="collapse"  data-parent="#accordion" data-target={"#"+this.props.groupInfo.groupId+"Folders"} onClick={this.GetGroupFolders.bind(this,this.state.GroupId)}>{this.state.FolderCount}</span>
                         </a>
                         <span className="bxDashDateCol">
                         {this.props.groupInfo.groupCreatedDate}
@@ -133,7 +151,7 @@ class GroupRow extends React.Component
                     </div>
                     <GroupDetails groupInfo = {this.props.groupInfo}/>
                     <GroupMembersRow groupInfo = {this.props.groupInfo} GroupMembers = {this.state.GroupMembers}/>
-                    <GroupFoldersRow groupInfo = {this.props.groupInfo} GroupFolders = {this.state.GroupFolders}/>       
+                    <GroupFoldersRow groupInfo = {this.props.groupInfo} GroupFolders = {this.state.GroupFolders} IsFolderLoaded={this.state.IsFolderLoaded}/>       
                 </div>
             );
         }

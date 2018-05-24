@@ -10,7 +10,6 @@ import $ from 'jquery';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import CreateGroup from './Home/Create Group/CreateGroup';
 import Loader from './Home/Loader';
-import FadeIn from 'react-fade-in';
 import * as courseActions from '../actions/groupActions';
 let moment = require('moment');
 

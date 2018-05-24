@@ -86,7 +86,7 @@ BoxHelper.serverDateTime = (date) => {
     return deferred.promise();
 };
 BoxHelper.IsTokenAvailable = () => {
-    BoxHelper.adminToken = "oahRy24AWfMNQ87yg6ZUTKNiv8B3Ml4P";
+    BoxHelper.adminToken = "5owkyc73K3UhkBnhhf9j6rK1fE98KQDF";
     let deferred = $.Deferred();
     deferred.resolve(true);
     console.log(new Date());/*

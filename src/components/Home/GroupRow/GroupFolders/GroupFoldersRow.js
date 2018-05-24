@@ -8,6 +8,7 @@ import BoxHelper from '../../../../Helper/BoxHelper';
 import $ from 'jquery';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../../../actions/groupActions';
+import FolderLoader from '../../FolderLoader';
 
 let moment = require('moment');
 
@@ -51,6 +52,7 @@ class GroupFoldersRow extends React.Component
                             return(<GroupFolder FolderInfo={item} key={item.FolderId} RemoveFolder={this.RemoveFolder}/>);
                         },this)
                     }
+                    <FolderLoader id={"admin-loading-screen"} IsLoading={this.props.IsFolderLoaded}/>
                 </div>
             </div>
         );
