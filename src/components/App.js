@@ -11,6 +11,9 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import CreateGroup from './Home/Create Group/CreateGroup';
 import Loader from './Home/Loader';
 import * as courseActions from '../actions/groupActions';
+import AddMember from './Home/Add Member/AddMember';
+import ShareFolder from './Home/Share Folder/ShareFolder';
+import SaveFolderConfirmDialog from './Home/GroupRow/GroupFolders/SaveFoldeConfirmDialog';
 let moment = require('moment');
 
 class App extends React.Component {
@@ -18,7 +21,7 @@ class App extends React.Component {
     super(props,context);
     this.state = {
       Groups:[],
-      IsLoading:"none",
+      IsLoaded:false,
       GroupLoaded:[]
     };
   }
@@ -39,7 +42,7 @@ class App extends React.Component {
     if(nextProps.groupLoaded.length === 20)
     {
       console.log(new Date());
-      this.setState({IsLoading:"block"});
+      this.setState({IsLoaded:true});
     }
   }
   GetUserGroupCollection(userName)
@@ -93,10 +96,14 @@ class App extends React.Component {
                   },this)
                 }
             </div>
+            <Loader id={"group-row-loading-screen"} IsLoaded={true}/>
           </div>
-        </Scrollbars>      
+        </Scrollbars>
+        <Loader id={"group-loading-screen"} IsLoaded={this.state.IsLoaded}/>      
         <CreateGroup/>
-        <Loader IsLoading={this.state.IsLoading}/>
+        <AddMember/>
+        <ShareFolder/>
+        
       </div>
     );
   }

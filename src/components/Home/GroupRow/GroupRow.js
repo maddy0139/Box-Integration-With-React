@@ -8,6 +8,7 @@ import CreateGroup from '../Create Group/CreateGroup';
 import BoxHelper from '../../../Helper/BoxHelper';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../../actions/groupActions';
+import SaveFolderConfirmDialog from './GroupFolders/SaveFoldeConfirmDialog';
 
 let moment = require('moment');
 class GroupRow extends React.Component
@@ -27,14 +28,44 @@ class GroupRow extends React.Component
             GroupMembers:[],
             GroupLoaded: { GroupId: this.props.groupInfo.groupId },
             IsLoading:true,
-            IsFolderLoaded:false
+            IsFolderLoaded:false,
+            CanSaveFolder:false,
+            RemovedFolders:[],
+            test:null
         };
         this.SetGroupAdmin = this.SetGroupAdmin.bind(this); 
-        this.GetGroupFolders = this.GetGroupFolders.bind(this);       
+        this.GetGroupFolders = this.GetGroupFolders.bind(this); 
+        this.RemoveFoldersFromGroup = this.RemoveFoldersFromGroup.bind(this);
+        this.SaveFolderChanges = this.SaveFolderChanges.bind(this);
     }
     componentDidMount()
     {
         this.GetGroupCollaboration(this.state.GroupId);
+    }
+
+    RemoveFoldersFromGroup(folder){
+        const newState = this.state;
+        newState.test = folder
+        newState.RemovedFolders.slice();
+        newState.RemovedFolders.push(folder);
+        this.setState(newState);
+        
+    }
+    SaveFolderChanges()
+    {
+        this.state.RemovedFolders.map((item,key)=>{
+            BoxHelper.DeleteCollaborations(item.FolderCollabId).then(data=>{
+                const index = this.state.RemovedFolders.findIndex(a=>a.FolderId===item.FolderId);
+                const arrayvar = this.state.RemovedFolders;
+                arrayvar.splice(index,1);
+                this.setState({RemovedFolders:arrayvar});
+            });
+        });
+        const count = this.state.RemovedFolders.length;
+        const newState = this.state;
+        newState.CanSaveFolder = (count>0)?true:false;
+        this.setState(newState);
+        
     }
     GetGroupFolders()
     {
@@ -59,19 +90,6 @@ class GroupRow extends React.Component
                 this.setState({CollaborationInfo:collabInfo});
                 this.setState({FolderCount:collabInfo.length});
                 this.GetGroupMembers(this.state.GroupId);
-                /*
-                $.each(collabInfo,(index,info)=>{
-                    BoxHelper.GetFoldersInformation(info.item.id).then(folderInfo =>{
-                        count++;
-                        this.SetFoldersDetails(folderInfo,info,collabInfo.length);
-                        if(count === collabInfo.length)
-                        {    
-                            
-                        }
-                        
-                    });
-                });*/
-            
         });
     }
     GetGroupMembers(groupId)
@@ -151,7 +169,10 @@ class GroupRow extends React.Component
                     </div>
                     <GroupDetails groupInfo = {this.props.groupInfo}/>
                     <GroupMembersRow groupInfo = {this.props.groupInfo} GroupMembers = {this.state.GroupMembers}/>
-                    <GroupFoldersRow groupInfo = {this.props.groupInfo} GroupFolders = {this.state.GroupFolders} IsFolderLoaded={this.state.IsFolderLoaded}/>       
+                    <GroupFoldersRow groupInfo = {this.props.groupInfo} GroupFolders = {this.state.GroupFolders} 
+                                     IsFolderLoaded={this.state.IsFolderLoaded} RemoveFoldersFromGroup={this.RemoveFoldersFromGroup} 
+                                     CanSaveFolder={this.state.CanSaveFolder} SaveFolderChanges={this.SaveFolderChanges}/>       
+                    <SaveFolderConfirmDialog GroupId={this.state.GroupId} SaveFolderChanges={this.SaveFolderChanges} RemovedFolders={this.state.RemovedFolders}/>
                 </div>
             );
         }

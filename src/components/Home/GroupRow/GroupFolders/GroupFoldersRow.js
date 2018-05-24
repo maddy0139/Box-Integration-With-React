@@ -8,7 +8,7 @@ import BoxHelper from '../../../../Helper/BoxHelper';
 import $ from 'jquery';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../../../actions/groupActions';
-import FolderLoader from '../../FolderLoader';
+import Loader from '../../Loader';
 
 let moment = require('moment');
 
@@ -21,38 +21,47 @@ class GroupFoldersRow extends React.Component
             GroupFolders:this.props.GroupFolders,
             GroupId : this.props.groupInfo.groupId,
             GroupName: this.props.groupInfo.groupName,
-            BPA: {title: ""},
-            course: { title: "test" }
+            CanSave:false
         };
-        this.RemoveFolder = this.RemoveFolder.bind(this);
+        this.SaveFolderChanges = this.SaveFolderChanges.bind(this);
+        this.RemoveFoldersFromGroup = this.RemoveFoldersFromGroup.bind(this);
     }
 
     componentWillReceiveProps(nextProps)
     {
-        this.setState({GroupFolders:nextProps.GroupFolders});
+        const newState = this.state;
+        newState.GroupFolders = nextProps.GroupFolders;
+        newState.CanSave = nextProps.CanSaveFolder;
+        this.setState({newState});
     }
-    RemoveFolder(folderId)
+    RemoveFoldersFromGroup(folderId)
     {
         const newState = this.state;
         const index = newState.GroupFolders.findIndex(a=>a.FolderId===folderId);
         if(index === -1) return;
+        this.props.RemoveFoldersFromGroup(newState.GroupFolders[index]);
         newState.GroupFolders.splice(index,1);
+        newState.CanSave = true;
         this.setState({newState});
+        
     }
-
+    SaveFolderChanges()
+    {
+        this.props.SaveFolderChanges();
+    }
     render()
     {
         return(
             <div className="FolderColumn panel-collapse collapse" id={this.state.GroupId+"Folders"}>
-                <GroupFolderTop/>
+                <GroupFolderTop GroupId = {this.state.GroupId} CanSave={this.state.CanSave} SaveFolderChanges={this.props.SaveFolderChanges}/>
                 <GroupFoldersHeader/>
                 <div style={{"width":"100%"}}>
                     {this.state.GroupFolders.map(function(item,key)
                         {
-                            return(<GroupFolder FolderInfo={item} key={item.FolderId} RemoveFolder={this.RemoveFolder}/>);
+                            return(<GroupFolder FolderInfo={item} key={item.FolderId} RemoveFoldersFromGroup={this.RemoveFoldersFromGroup}/>);
                         },this)
                     }
-                    <FolderLoader id={"admin-loading-screen"} IsLoading={this.props.IsFolderLoaded}/>
+                    <Loader id={"admin-loading-screen"} IsLoaded={this.props.IsFolderLoaded}/>
                 </div>
             </div>
         );

@@ -4,10 +4,10 @@ class Loader extends React.Component
 {
     render()
     {
-        if(this.props.IsLoading === "none")
+        if(!this.props.IsLoaded)
         {
             return(
-                <div id="group-loading-screen">
+                <div id={this.props.id}>
                     <div className="crawler is-large"><div></div><div></div><div></div></div>
                 </div>
             );
@@ -15,7 +15,7 @@ class Loader extends React.Component
         else
         {
             return(
-                <div id="group-loading-screen" style={{"display":"none"}}>
+                <div id={this.props.id} style={{"display":"none"}}>
                     <div className="crawler is-large"><div></div><div></div><div></div></div>
                 </div>
             );

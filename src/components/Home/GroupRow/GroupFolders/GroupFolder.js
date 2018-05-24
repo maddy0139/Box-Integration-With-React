@@ -23,7 +23,7 @@ class GroupFolder extends React.Component
     }
     RemoveFolder(folderId)
     {
-        this.props.RemoveFolder(folderId);
+        this.props.RemoveFoldersFromGroup(folderId);
     }
     render()
     {

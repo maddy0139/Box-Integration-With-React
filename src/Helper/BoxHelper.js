@@ -66,6 +66,11 @@ BoxHelper.GetFoldersInformation = (folderId) => {
         .then(folderInfo => folderInfo);
 };
 
+BoxHelper.DeleteCollaborations = (collborationId) =>{
+    return BoxHelper.adminClient.folders.deleteCollaborations({ collaborationId: collborationId })
+    .then(result=>result);
+};
+
 BoxHelper.serverDateTime = (date) => {
     let dt = date || new Date();
     let context = new window.SP.ClientContext(window._spPageContextInfo.webAbsoluteUrl);
@@ -86,7 +91,7 @@ BoxHelper.serverDateTime = (date) => {
     return deferred.promise();
 };
 BoxHelper.IsTokenAvailable = () => {
-    BoxHelper.adminToken = "5owkyc73K3UhkBnhhf9j6rK1fE98KQDF";
+    BoxHelper.adminToken = "FsXW4GF13ewaJIGY6sjS2RYo7tOfDVHk";
     let deferred = $.Deferred();
     deferred.resolve(true);
     console.log(new Date());/*
@@ -115,11 +120,11 @@ BoxHelper.IsTokenAvailable = () => {
 
 BoxHelper.OnReadyJqueryFunctions = () => {
     // Slim scroll style
-    $('.bxDashboardAccordion').slimscroll({
+    /*$('.bxDashboardAccordion').slimscroll({
         height: '750px',
         alwaysVisible: true,
         allowPageScroll: true
-    });
+    });*/
     $("#success-alert").hide();
 
     // Share folder Popup make screen height
