@@ -22,7 +22,8 @@ class App extends React.Component {
     this.state = {
       Groups:[],
       IsLoaded:false,
-      GroupLoaded:[]
+      GroupLoaded:[],
+      TestGroups:[]
     };
   }
   componentDidMount() 
@@ -78,7 +79,17 @@ class App extends React.Component {
                    "groupId":groupId,"membershipId":membershipId,"role":role,
                    "groupCreatedDate":groupCreatedDate,
                    "groupInviteLevel":groupInviteLevel});
+    
+    let testGroup = this.state.TestGroups;
+    let index = testGroup.length;
+    testGroup.push({"Group":{},"Members":[],"Folders":[]});
+    testGroup[index].Group = {"groupIndex": rowId,"groupName":groupName,"groupDesc":groupDesc,
+                   "groupId":groupId,"membershipId":membershipId,"role":role,
+                   "groupCreatedDate":groupCreatedDate,
+                   "groupInviteLevel":groupInviteLevel};
+    this.setState({TestGroups:testGroup});
     this.setState({Groups:arrayvar});
+
   }
   
   render() {
